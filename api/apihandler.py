@@ -1,13 +1,12 @@
 from tastypie import fields
 from tastypie.resources import ModelResource, ALL_WITH_RELATIONS
-from api.models import Event, EventSection, Page, PageSection
+from api.models import Event, EventSection, Page, PageSection, Notification
 
 
 class EventResource(ModelResource):
     parent = fields.ToOneField('self', 'parent', null=True)
     sections = fields.ToManyField('api.apihandler.EventSectionResource',
         'eventsection_set', full=True, null=True)
-
 
     class Meta:
         queryset = Event.objects.all()
@@ -32,7 +31,6 @@ class PageResource(ModelResource):
     sections = fields.ToManyField('api.apihandler.PageSectionResource',
         'pagesection_set', full=True, null=True)
 
-
     class Meta:
         queryset = Page.objects.all()
         resource_name = 'page'
@@ -49,3 +47,7 @@ class PageSectionResource(ModelResource):
         allowed_methods = ['get']
         fields = ['label', 'content', 'order']
         include_resource_uri = False
+
+
+#class NotificationResource(ModelResource):
+#    class Meta:

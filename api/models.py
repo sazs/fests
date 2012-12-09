@@ -42,3 +42,23 @@ class PageSection(models.Model):
 
     def __unicode__(self):
         return '%s - %s' % (self.page, self.label)
+
+
+class Notification(models.Model):
+    event = models.ForeignKey('Event', null=True, blank=True)
+    notification = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-timestamp',)
+    
+    def __unicode__(self):
+        if self.event:
+            event_name = self.name
+        else:
+            event_name = 'General'
+
+        if len(self.notification) > 25:
+            return '%s - %25s ...' % (event_name, self.notification)
+        else:
+            return '%s - %s' % (event_name, self.notification)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from api.models import Event, EventSection, Page, PageSection
+from api.models import Event, EventSection, Page, PageSection, Notification
 
 
 class EventSectionInline(admin.StackedInline):
@@ -28,3 +28,4 @@ class PageAdmin(admin.ModelAdmin):
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(Page, PageAdmin)
+admin.site.register(Notification)
